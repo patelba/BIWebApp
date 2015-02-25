@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BIWebApp.Data.BI_K3_Costs>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Role_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Daily_Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hourly_Cost)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Role_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Daily_Cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hourly_Cost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BI_CostID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BI_CostID })
+        </td>
+    </tr>
+}
+
+</table>
