@@ -10,8 +10,7 @@ namespace BIWebApp
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/classie.js",
-                        "~/Scripts/cbpAnimatedHeader.js"));
+                        "~/Scripts/classie.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -23,13 +22,18 @@ namespace BIWebApp
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                       "~/Scripts/freelancer.js",
-                      "~/Scripts/respond.js"));
+                       "~/Scripts/handlebars.js",
+                      "~/Scripts/respond.js",
+                      //"~/Scripts/plugins/jQuery/jQuery-2.1.3.min.js",
+                      "~/Scripts/plugins/slimScroll/jquery.slimScroll.min.js",
+                      "~/Scripts/plugins/fastclick/fastclick.min.js",
+                      "~/Scripts/dist/js/app.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/freelancer.css",
+                      "~/Content/AdminLTE.min.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/font-awesome/css/font-awesome.min.css"));
+                      "~/Content/skins/_all-skins.min.css"
+                      ));
         }
     }
 }

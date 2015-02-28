@@ -1,9 +1,5 @@
 ﻿@model BIWebApp.Data.BI_K3_Costs
 
-@{
-    ViewBag.Title = "Edit";
-}
-
 <h2>Edit</h2>
 
 
@@ -12,7 +8,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Costs</h4>
+        <h4>Resource Costs</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.BI_CostID)
@@ -63,3 +59,18 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#Daily_Cost").on('change textInput input', function () {
+            var dailyCost = $("#Daily_Cost").val();
+            console.log(dailyCost);
+            if (!isNaN(dailyCost)) {
+                $("#Hourly_Cost").val(dailyCost / 7.5);
+            }
+
+        });
+    });
+
+
+</script>

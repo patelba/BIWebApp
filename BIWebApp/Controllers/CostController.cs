@@ -9,6 +9,7 @@ using WebGrease;
 
 namespace BIWebApp.Controllers
 {
+    //[Authorize(Users = @"k3btg\Bhupendra.Patel")]
     public class CostController : Controller
     {
         // GET: Cost
@@ -27,32 +28,21 @@ namespace BIWebApp.Controllers
         //
         // POST: /Cost/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(BI_K3_Costs modelCosts)
         {
             try
             {
-                var costService = new CostService();
-                var cost = new BI_K3_Costs()
+                if (ModelState.IsValid)
                 {
-                    BI_CostID = 0,
-                    Role_Type = collection["role_type"],
-                    Role_Name = collection["role_name"]
-                   
-                };
-                if (collection["daily_cost"] != null)
-                {
-                    cost.Daily_Cost = decimal.Parse(collection["daily_cost"]);
+                    var costService = new CostService();
+                    costService.InsertCost(modelCosts);
+                    return RedirectToAction("Index");
                 }
-                if (collection["hourly_cost"] != null)
-                {
-                    cost.Hourly_Cost = decimal.Parse(collection["hourly_cost"]);
-                }
-                costService.InsertCost(cost);
-                return RedirectToAction("Index");
+                return View(modelCosts);
             }
             catch (Exception exception) 
             {
-                return View();
+                return View(modelCosts);
             }
         }
 
@@ -69,33 +59,23 @@ namespace BIWebApp.Controllers
         //
         // POST: /Cost/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(BI_K3_Costs cost)
         {
             try
             {
-                var costService = new CostService();
-
-                var cost = new BI_K3_Costs()
+                if (ModelState.IsValid)
                 {
-                    BI_CostID = int.Parse(collection["BI_CostID"]),
-                    Role_Type = collection["role_type"],
-                    Role_Name = collection["role_name"]
-
-                };
-                if (collection["daily_cost"] != null)
-                {
-                    cost.Daily_Cost = decimal.Parse(collection["daily_cost"]);
+                    var costService = new CostService();
+                    costService.UpdateCost(cost);
+                    return RedirectToAction("Index");
                 }
-                if (collection["hourly_cost"] != null)
-                {
-                    cost.Hourly_Cost = decimal.Parse(collection["hourly_cost"]);
-                }
-                costService.UpdateCost(cost);
-                return RedirectToAction("Index");
+
+                return View(cost);
+               
             }
             catch (Exception exception)
             {
-                return View();
+                return View(cost);
             }
         }
 
@@ -111,7 +91,7 @@ namespace BIWebApp.Controllers
         //
         // POST: /CodeCombination/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id,FormCollection collection)
         {
             try
             {
